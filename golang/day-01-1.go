@@ -6,7 +6,7 @@ package main
 
 import (
 	"fmt"
-    "os"
+	"os"
 	"bufio"
 	"strconv"
 )
@@ -19,14 +19,14 @@ func main() {
 }
 
 func Read(filename string) (lines []int, lines_diff []int) {
-    file, _ := os.Open("../data/day01.txt")
+	file, _ := os.Open("../data/day01.txt")
 
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
 		i, _ := strconv.Atoi(scanner.Text())
-        lines = append(lines, i)
+		lines = append(lines, i)
 		lines_diff = append(lines_diff, 2020 - i)
-    }
+	}
 	return
 }
 
