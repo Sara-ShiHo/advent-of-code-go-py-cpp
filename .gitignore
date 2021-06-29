@@ -1,7 +1,8 @@
 # ignore everything
 *
 # but don't ignore files ending with slash = directories
+!*/
 !*.cpp
 !*.py
 !*.go
-!go.mod
+go.mod
