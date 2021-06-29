@@ -6,22 +6,21 @@
 #include <algorithm>
 using namespace std;
 
-int find_trees(string dat [], int r, int d)
+int find_trees(string dat [], int down_length, int r, int d)
 {
-    int length = sizeof(dat[0]);
     int n_X = 0;
+    int right_length = dat[0].length();
     int right_pos = r;
     int down_pos = d;
-
-    while (down_pos < length)
+    while (down_pos < down_length)
     {
         string line = dat[down_pos];
         if (line[right_pos] == '#')
         {
             n_X += 1;
         }
-        right_pos = (right_pos + r) % length;
-        down_pos += d;
+        right_pos = (right_pos + r) % right_length;
+        down_pos = down_pos + d;
     }
     return n_X;
 }
@@ -37,14 +36,16 @@ int main () {
         while ( getline (myfile,line) ) 
         {
             dat[i] = line;
-            i += 1;
+            i++;
         }
         myfile.close();
-        cout << find_trees(dat, 1, 1) << "\n";
-        cout << find_trees(dat, 3, 1) << "\n";
-        cout << find_trees(dat, 5, 1) << "\n";
-        cout << find_trees(dat, 7, 1) << "\n";
-        cout << find_trees(dat, 1, 2) << "\n";
+        long product = 1;
+        product = product * find_trees(dat, i, 1, 1);
+        product = product * find_trees(dat, i, 3, 1);
+        product = product * find_trees(dat, i, 5, 1);
+        product = product * find_trees(dat, i, 7, 1);
+        product = product * find_trees(dat, i, 1, 2);
+        cout << product << "\n";
     }
     else cout << "Unable to open file";
     return 0;
