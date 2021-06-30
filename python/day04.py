@@ -5,7 +5,6 @@ def OO_bounds(value, lower, upper):
 
 
 def valid_dict(d):
-
     # years -----------------------
     byr = int(d['byr'])
     iyr = int(d['iyr'])
@@ -60,7 +59,6 @@ def valid_dict(d):
         for c in pid:
             if c not in nums:
                 return False
-    print(byr, iyr, eyr, hcl, ecl, pid)
     return True
 
 
@@ -70,7 +68,21 @@ dat.append('')
 
 contents_s = ''
 count = 0
+for line in dat:
+    if line == '':
+        contents = contents_s.split(' ')
+        contents_d = [info for info in contents if (info != '') & ('cid' not in info)]
+        if len(contents_d) == 7:
+            count += 1
+        contents_s = ''
 
+    contents_s = contents_s + line + ' '
+
+print(f'part I: {count}')
+
+
+contents_s = ''
+count = 0
 for line in dat:
     if line == '':
         contents = contents_s.split(' ')
@@ -84,4 +96,4 @@ for line in dat:
 
     contents_s = contents_s + line + ' '
 
-print(count)
+print(f'part II: {count}')
