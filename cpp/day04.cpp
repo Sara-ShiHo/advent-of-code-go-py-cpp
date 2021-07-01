@@ -172,7 +172,7 @@ int main () {
         count1 += valid_size(m);
         count2 += (valid_size(m) * valid_id(m) * valid_years(m) * valid_height(m) * valid_hair_eyes(m));
         myfile.close();
-        cout << "Part I: " << count1 << "\n";
-        cout << "Part II: " << count2 << "\n";
     }
+    cout << "Part I: " << count1 << "\n";
+    cout << "Part II: " << count2 << "\n";
 }
