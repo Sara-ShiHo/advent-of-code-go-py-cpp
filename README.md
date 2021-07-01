@@ -5,7 +5,7 @@ implement advent of code problems in golang, python, and C++
 
 ### Day 01
  - Goal: Find elements in array which sum to 2020.
- - Implementation: Find set intersection of array and 2020 minus array.
+ - Implementation: Find the intersection of the set of numbers and the set of numbers subtracted from 2020.
 
 ### Day 02
  - Goal: Given parameters, determine whether a string password is valid.
@@ -21,4 +21,5 @@ implement advent of code problems in golang, python, and C++
 
 ### Day 05
  - Goal: Binary space partitioning seat positions; find which seat is unoccupied.
- - Implementation: Sort the occupied seat numbers, find the missing, nonconsecutive seat number.
+ - Implementation: Sort the occupied seat numbers, find the missing, nonconsecutive seat number. C++ note: integer division yields the integer sfloor of the output (not rounded or converted to float)
+

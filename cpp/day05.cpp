@@ -2,18 +2,25 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
-#include <map>
+#include <set>
 #include <cmath>
-#include <cfenv>
-#pragma STDC FENV_ACCESS ON
 
 using namespace std;
 
+int insertSorted(int arr[], int n, int key)
+{
+    int i;
+    for (i = n - 1; (i >= 0 && arr[i] > key); i--)
+        arr[i + 1] = arr[i];
+    arr[i + 1] = key;
+    return (n + 1);
+}
+
 int find_row(string ticket)
 {
-    int low_row = 0;
-    int up_row = 127;
-    for (char& ch : ticket.substr(0, 6))
+    float low_row = 0;
+    float up_row = 127;
+    for (char& ch : ticket.substr(0, 7))
     {
         if (ch == 'F')
         {
@@ -33,9 +40,9 @@ int find_row(string ticket)
 
 int find_col(string ticket)
 {
-    int low_row = 0;
-    int up_row = 7;
-    for (char& ch: ticket.substr(7, 9))
+    float low_row = 0;
+    float up_row = 7;
+    for (char& ch: ticket.substr(7))
     {
         if (ch == 'L')
         {
@@ -62,8 +69,9 @@ int find_seat(string ticket)
 
 int main () {
     string line;
-    map<string, string> m {};
-    string contents = "";
+    int seat;
+    int n = 0;
+    int seats[1000] = {};
 
     ifstream myfile ("../data/day05.txt");
     int max_seat = 0;
@@ -71,7 +79,8 @@ int main () {
     {
         while ( getline (myfile,line) ) 
         {
-            int seat = find_seat(line);
+            seat = find_seat(line);
+            n = insertSorted(seats, n, seat);
             if (seat > max_seat)
             {
                 max_seat = seat;
@@ -80,4 +89,14 @@ int main () {
     }
     myfile.close();
     cout << "Part I :" << max_seat << "\n";
+
+    // find which seat is non-consecutive (missing)
+    int start_i = seats[0];
+    int i = 0;
+    while (i + start_i == seats[i])
+    {
+        i += 1;
+    }
+    cout << "Part II: " << i + start_i << "\n";
+
 }
