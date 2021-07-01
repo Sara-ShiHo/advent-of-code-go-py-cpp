@@ -43,20 +43,12 @@ with open('../data/day05.txt', 'r') as f:
 seats = [find_seat(ticket) for ticket in dat]
 print(f'Part I: {max(seats)}')
 
-# organize the filled seats into a matrix
-d = matrix = [[np.nan] * 8 for i in range(128)]
-seats = [(find_row(ticket), find_col(ticket)) for ticket in dat]
-for r, c in seats:
-    d[r][c] = 1
+seats = [find_row(ticket) * 8 + find_col(ticket) for ticket in dat]
+seats = sorted(seats)
 
-# parse through the non-existant beginning rows
-begin_r = 0
-while (begin_r < len(d)) and (np.nan in d[begin_r]):
-    begin_r += 1
-
-# start searching for my seat, starting from the real beginning row
-my_r = begin_r
-while (my_r < len(d)) and (np.nan not in d[my_r]):
-    my_r += 1
-r_pos = d[my_r].index(np.nan)
-print(f'Part II: {my_r * 8 + r_pos}')
+# find which seat is non-consecutive (missing)
+start_i = min(seats)
+i = 0
+while i + start_i == seats[i]:
+    i += 1
+print(f'Part II: {i + start_i}')
